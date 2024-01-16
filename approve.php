@@ -170,6 +170,15 @@ if (!isset($_SESSION['username'])) {
 							<aclass="alert-link">Data berhasil di approve</a>. 
 						</div>
 						';
+					} else if($status == 'batal_success'){
+						echo '
+						<div class="alert alert-success fade show">
+							<span class="close" data-dismiss="alert">×</span>
+							<strong>Success!</strong>
+							<aclass="alert-link">Batal approve berhasil</a>. 
+						</div>
+						';
+
 					} else {
 						echo '
 						<div class="alert alert-danger fade show">
@@ -225,6 +234,7 @@ if (!isset($_SESSION['username'])) {
 											<td><?= $row['nik'] ?></td>
 											<td><?= $row['nama'] ?></td>
 											<td class="with-btn" nowrap>
+												<a href="prosesbatalapprove.php?id=<?= $row['id'] ?>&tabel=data_penduduk" onclick="return confirm('Apakah Anda yakin ingin membatalkan data ini?')" class="btn btn-sm btn-danger width-60">Batal</a>
 												<a href="prosesapprove.php?id=<?= $row['id'] ?>&tabel=data_penduduk" onclick="return confirm('Apakah Anda yakin ingin approve data ini?')" class="btn btn-sm btn-primary width-100 m-r-2">Approve</a>
 											</td>
 										</tr>
@@ -268,7 +278,7 @@ if (!isset($_SESSION['username'])) {
 											<th>No</th>
 											<th>No Surat</th>
 											<th>Nama Anak</th>
-											<th>Jenis Kelamin</th>
+											<th>Tanggal</th>
 											<th width="1%">Action</th>
 										</tr>
 									</thead>
@@ -283,8 +293,9 @@ if (!isset($_SESSION['username'])) {
 											<td><?= $no++ ?></td>
 											<td><?= $row['no_surat'] ?></td>
 											<td><?= $row['nama_anak'] ?></td>
-											<td><?= $row['jenis_kelamin'] ?></td>
+											<td><?= $row['tanggal'] ?></td>
 											<td class="with-btn" nowrap>
+												<a href="prosesbatalapprove.php?id=<?= $row['id'] ?>&tabel=data_kelahiran" onclick="return confirm('Apakah Anda yakin ingin membatalkan data ini?')" class="btn btn-sm btn-danger width-60">Batal</a>
 												<a href="prosesapprove.php?id=<?= $row['id'] ?>&tabel=data_kelahiran" onclick="return confirm('Apakah Anda yakin ingin approve data ini?')" class="btn btn-sm btn-primary width-100 m-r-2">Approve</a>
 											</td>
 										</tr>
@@ -347,6 +358,7 @@ if (!isset($_SESSION['username'])) {
 											<td><?= $row['tanggal'] ?></td>
 											<td><?= $row['pelapor'] ?></td>
 											<td class="with-btn" nowrap>
+												<a href="prosesbatalapprove.php?id=<?= $row['id'] ?>&tabel=data_kematian" onclick="return confirm('Apakah Anda yakin ingin membatalkan data ini?')" class="btn btn-sm btn-danger width-60">Batal</a>
 												<a href="prosesapprove.php?id=<?= $row['id'] ?>&tabel=data_kematian" onclick="return confirm('Apakah Anda yakin ingin approve data ini?')" class="btn btn-sm btn-primary width-100 m-r-2">Approve</a>
 											</td>
 										</tr>
@@ -409,7 +421,71 @@ if (!isset($_SESSION['username'])) {
 											<td><?= $row['jenis_kelamin'] ?></td>
 											<td><?= $row['nama_usaha'] ?></td>
 											<td class="with-btn" nowrap>
+												<a href="prosesbatalapprove.php?id=<?= $row['id'] ?>&tabel=data_izinusaha" onclick="return confirm('Apakah Anda yakin ingin membatalkan data ini?')" class="btn btn-sm btn-danger width-60">Batal</a>
 												<a href="prosesapprove.php?id=<?= $row['id'] ?>&tabel=data_izinusaha" onclick="return confirm('Apakah Anda yakin ingin approve data ini?')" class="btn btn-sm btn-primary width-100 m-r-2">Approve</a>
+											</td>
+										</tr>
+                                        <?php 
+                                            }
+                                            endif; 
+                                        ?>
+									</tbody>
+								</table>
+							</div>
+							<!-- end table-responsive -->
+						</div>
+						<!-- end panel-body -->
+					</div>
+					<!-- end panel -->
+				</div>
+				<!-- end col-6 -->
+			</div>
+
+			
+			<div class="row">
+				<!-- begin col-6 -->
+				<div class="col-lg-12">
+					<!-- begin panel -->
+					<div class="panel panel-inverse" data-sortable-id="table-basic-7">
+						<!-- begin panel-heading -->
+						<div class="panel-heading">
+							<div class="panel-heading-btn">
+								<!-- <a href="cetakdatausaha.php" target="_blank" class="btn btn-sm btn-danger">print</a> -->
+							</div>
+							<h4 class="panel-title">Data Approve Pindah</h4>
+						</div>
+						<!-- end panel-heading -->
+						<!-- begin panel-body -->
+						<div class="panel-body">
+							<!-- begin table-responsive -->
+							<div class="table-responsive">
+								<table class="table table-striped m-b-0">
+									<thead>
+										<tr>
+											<th>No</th>
+											<th>No Surat</th>
+											<th>Nama</th>
+											<th>Jenis Kelamin</th>
+											<th>Alamat Baru</th>
+											<th width="1%">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+                                        <?php 
+                                            $result = $koneksi->query("SELECT * FROM data_pindah WHERE status = 0");
+                                            $no = 1;
+                                            if($result->num_rows > 0) :
+                                                while ($row = $result->fetch_assoc()) {
+                                        ?>
+										<tr>
+											<td><?= $no++ ?></td>
+											<td><?= $row['no_surat'] ?></td>
+											<td><?= $row['nama'] ?></td>
+											<td><?= $row['jenis_kelamin'] ?></td>
+											<td><?= $row['alamat_baru'] ?></td>
+											<td class="with-btn" nowrap>
+												<a href="prosesbatalapprove.php?id=<?= $row['id'] ?>&tabel=data_pindah" onclick="return confirm('Apakah Anda yakin ingin membatalkan data ini?')" class="btn btn-sm btn-danger width-60">Batal</a>
+												<a href="prosesapprove.php?id=<?= $row['id'] ?>&tabel=data_pindah" onclick="return confirm('Apakah Anda yakin ingin approve data ini?')" class="btn btn-sm btn-primary width-100 m-r-2">Approve</a>
 											</td>
 										</tr>
                                         <?php 

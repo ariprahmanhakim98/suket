@@ -12,7 +12,6 @@ $hari = "";
 $tanggal = "";
 $tempat = "";
 $nama_anak = "";
-$jenis_kelamin = "";
 $nama_ibu = "";
 $nama_ayah = "";
 $alamat = "";
@@ -29,7 +28,6 @@ if($_GET){
         $tanggal = $row['tanggal'];
         $tempat = $row['tempat'];
         $nama_anak = $row['nama_anak'];
-        $jenis_kelamin = $row['jenis_kelamin'];
         $nama_ibu = $row['nama_ibu'];
         $nama_ayah = $row['nama_ayah'];
         $alamat = $row['alamat'];
@@ -154,6 +152,7 @@ if($_GET){
                             <li><a href="inputdatakelahiran.php">Input Data Kelahiran</a></li>
                             <li><a href="inputdatakematian.php">Input Data Kematian</a></li>
                             <li><a href="inputdataizinusaha.php">Input Data Izin Usaha</a></li>
+							<li><a href="inputdatapindah.php">Tambah Data Pindah</a></li>
 							<li><a href="approve.php">Approve</a></li>
                         </ul>
                     </li>
@@ -167,7 +166,8 @@ if($_GET){
 							<li><a href="rekapitulasidatapenduduk.php">Rekapitulasi Data Penduduk </a></li>
 							<li><a href="rekapitulasidatakelahiran.php">Rekapitulasi Data Kelahiran</a></li>
 							<li><a href="rekapitulasidatakematian.php">Rekapitulasi Data Kematian</a></li>
-							<li><a href="jrekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidatapindah.php">Rekapitulasi Data Pindah</a></li>
                         </ul>
                     </li>
                     <!-- begin sidebar minify button -->
@@ -266,15 +266,6 @@ if($_GET){
                                     <label class="col-form-label col-md-3">Nama Anak</label>
                                     <div class="col-md-9">
                                         <input name="nama_anak" value="<?= $nama_anak ?>" type="text" class="form-control m-b-5" placeholder="Masukan Nama Anak" />
-                                    </div>
-                                </div>
-                                <div class="form-group row m-b-15">
-                                    <label class="col-form-label col-md-3">Jenis Kelamin</label>
-                                    <div class="col-md-9">
-                                        <select name="jenis_kelamin" value="<?= $jenis_kelamin ?>" class="form-control">
-                                            <option value="Laki-Laki" <?= ($jenis_kelamin == 'Laki-Laki') ? 'selected' : '' ?>>Laki-Laki</option>
-                                            <option value="Perempuan" <?= ($jenis_kelamin == 'Perempuan') ? 'selected' : '' ?>>Perempuan</option>
-                                        </select>
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-15">

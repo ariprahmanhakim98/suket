@@ -55,8 +55,8 @@ if (!isset($_SESSION['username'])) {
 		$kelahiran = $dtkelahiran;
 		$kematian = $dtkematian;
 		$usaha = $dtusaha;
-		// $pindah = $dtpindah;
-		$pindah = 5;
+		$pindah = $dtpindah;
+		// $pindah = 5;
 
         ?>
 
@@ -177,7 +177,8 @@ if (!isset($_SESSION['username'])) {
 							<li><a href="rekapitulasidatapenduduk.php">Rekapitulasi Data Penduduk </a></li>
 							<li><a href="rekapitulasidatakelahiran.php">Rekapitulasi Data Kelahiran</a></li>
 							<li><a href="rekapitulasidatakematian.php">Rekapitulasi Data Kematian</a></li>
-							<li><a href="jrekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidatapindah.php">Rekapitulasi Data Pindah</a></li>
 						</ul>
 					</li>
 					<!-- begin sidebar minify button -->

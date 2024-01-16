@@ -13,7 +13,7 @@ if (!isset($_SESSION['username'])) {
 
 <head>
     <meta charset="utf-8" />
-    <title>Web Apps | Rekapitulasi Data Kelahiran</title>
+    <title>Web Apps | Rekapitulasi Data Pindah</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -123,6 +123,7 @@ if (!isset($_SESSION['username'])) {
                             <li><a href="inputdatakelahiran.php">Input Data Kelahiran</a></li>
                             <li><a href="inputdatakematian.php">Input Data Kematian</a></li>
                             <li><a href="inputdataizinusaha.php">Input Data Izin Usaha</a></li>
+							<li><a href="inputdatapindah.php">Tambah Data Pindah</a></li>
 							<li><a href="approve.php">Approve</a></li>
                         </ul>
                     </li>
@@ -136,7 +137,8 @@ if (!isset($_SESSION['username'])) {
 							<li><a href="rekapitulasidatapenduduk.php">Rekapitulasi Data Penduduk </a></li>
 							<li><a href="rekapitulasidatakelahiran.php">Rekapitulasi Data Kelahiran</a></li>
 							<li><a href="rekapitulasidatakematian.php">Rekapitulasi Data Kematian</a></li>
-							<li><a href="jrekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidatapindah.php">Rekapitulasi Data Pindah</a></li>
                         </ul>
                     </li>
                     <!-- begin sidebar minify button -->
@@ -154,7 +156,7 @@ if (!isset($_SESSION['username'])) {
         <!-- begin #content -->
         <div id="content" class="content">
             <!-- begin page-header -->
-            <h1 class="page-header">Rekapitulasi Data Kelahiran</h1>
+            <h1 class="page-header">Rekapitulasi Data Pindah</h1>
             <!-- end page-header -->
             
 			<!-- begin row -->
@@ -166,9 +168,9 @@ if (!isset($_SESSION['username'])) {
 						<!-- begin panel-heading -->
 						<div class="panel-heading">
 							<div class="panel-heading-btn">
-								<a href="cetakdatakelahiran.php" target="_blank" class="btn btn-sm btn-danger">print</a>
+								<a href="cetakdatakematian.php" target="_blank" class="btn btn-sm btn-danger">print</a>
 							</div>
-							<h4 class="panel-title">Rekapitulasi Data Kelahiran</h4>
+							<h4 class="panel-title">Rekapitulasi Data Pindah</h4>
 						</div>
 						<!-- end panel-heading -->
 						<!-- begin panel-body -->
@@ -180,19 +182,22 @@ if (!isset($_SESSION['username'])) {
 										<tr>
 											<th>No</th>
 											<th>No Surat</th>
-											<th>Hari</th>
-											<th>Tanggal</th>
-											<th>Tempat</th>
-											<th>Nama Anak</th>
-											<th>Nama Ibu</th>
-											<th>Nama Ayah</th>
+											<th>NIK</th>
+											<th>Nama</th>
+											<th>Tempat Lahir</th>
+											<th>Tanggal Lahir</th>
+											<th>Jenis Kelamin</th>
+											<th>Agama</th>
 											<th>Alamat</th>
+											<th>Pindah Dari</th>
+											<th>Alasan Pindah</th>
+											<th>Alamat Baru</th>
 											<th width="1%">Action</th>
 										</tr>
 									</thead>
 									<tbody>
                                         <?php 
-                                            $result = $koneksi->query("SELECT * FROM data_kelahiran WHERE status = 1");
+                                            $result = $koneksi->query("SELECT * FROM data_pindah WHERE status = 1");
                                             $no = 1;
                                             if($result->num_rows > 0) :
                                                 while ($row = $result->fetch_assoc()) {
@@ -200,21 +205,24 @@ if (!isset($_SESSION['username'])) {
 										<tr>
 											<td><?= $no++ ?></td>
 											<td><?= $row['no_surat'] ?></td>
-											<td><?= $row['hari'] ?></td>
-											<td><?= $row['tanggal'] ?></td>
-											<td><?= $row['tempat'] ?></td>
-											<td><?= $row['nama_anak'] ?></td>
-											<td><?= $row['nama_ibu'] ?></td>
-											<td><?= $row['nama_ayah'] ?></td>
+											<td><?= $row['nik'] ?></td>
+											<td><?= $row['nama'] ?></td>
+											<td><?= $row['tempat_lahir'] ?></td>
+											<td><?= $row['tanggal_lahir'] ?></td>
+											<td><?= $row['jenis_kelamin'] ?></td>
+											<td><?= $row['agama'] ?></td>
 											<td><?= $row['alamat'] ?></td>
+											<td><?= $row['pindah_dari'] ?></td>
+											<td><?= $row['alasan_pindah'] ?></td>
+											<td><?= $row['alamat_baru'] ?></td>
 											<td class="with-btn" nowrap>
-												<a href="inputdatakelahiran.php?status=0&id=<?= $row['id'] ?>" class="btn btn-sm btn-primary width-60 m-r-2">Edit</a>
-												<a href="deletedata.php?id=<?= $row['id'] ?>&tabel=data_kelahiran" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger width-60">Delete</a>
+												<a href="inputdatapindah.php?status=0&id=<?= $row['id'] ?>" class="btn btn-sm btn-primary width-60 m-r-2">Edit</a>
+												<a href="deletedata.php?id=<?= $row['id'] ?>&tabel=data_pindah" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger width-60">Delete</a>
 											</td>
 										</tr>
                                         <?php 
                                             }
-                                        endif; 
+                                            endif; 
                                         ?>
 									</tbody>
 								</table>
