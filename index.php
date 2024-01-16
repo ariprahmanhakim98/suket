@@ -1,5 +1,6 @@
 <?php
 include 'koneksi.php';
+include 'persentasedata.php';
 session_start();
 
 if (!isset($_SESSION['username'])) {
@@ -41,6 +42,42 @@ if (!isset($_SESSION['username'])) {
 	<!-- ================== BEGIN BASE JS ================== -->
 	<script src="assets/plugins/pace/pace.min.js"></script>
 	<!-- ================== END BASE JS ================== -->
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        <?php
+        
+		$penduduk = $dtpenduduk;
+		$kelahiran = $dtkelahiran;
+		$kematian = $dtkematian;
+		$usaha = $dtusaha;
+		// $pindah = $dtpindah;
+		$pindah = 5;
+
+        ?>
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Data Penduduk',     <?php echo $penduduk; ?>],
+          ['Data Kelahiran',      <?php echo $kelahiran; ?>],
+          ['Data Kematian',      <?php echo $kematian; ?>],
+          ['Data Izin Usaha',      <?php echo $usaha; ?>],
+          ['Data Pindah',      <?php echo $pindah; ?>]
+        ]);
+
+        var options = {
+          title: 'Persentase Data'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
 </head>
 <body>
 	<!-- begin #page-loader -->
@@ -126,6 +163,7 @@ if (!isset($_SESSION['username'])) {
 							<li><a href="inputdatakelahiran.php">Tambah Data Kelahiran</a></li>
 							<li><a href="inputdatakematian.php">Tambah Data Kematian</a></li>
 							<li><a href="inputdataizinusaha.php">Tambah Data Izin Usaha</a></li>
+							<li><a href="inputdatapindah.php">Tambah Data Pindah</a></li>
 							<li><a href="approve.php">Approve</a></li>
 						</ul>
 					</li>
@@ -160,7 +198,7 @@ if (!isset($_SESSION['username'])) {
 			<!-- end page-header -->
 			
 			<!-- begin row -->
-			<div class="row">
+			<div class="row d-none">
 				<!-- begin col-3 -->
 				<div class="col-lg-3 col-md-6">
 					<div class="widget widget-stats bg-red">
@@ -219,6 +257,10 @@ if (!isset($_SESSION['username'])) {
 				<!-- end col-3 -->
 			</div>
 			<!-- end row -->
+			<div class="row">
+				<!-- <div id="piechart" style="width: 900px; height: 500px;"></div> -->
+				<div id="piechart" style="width: 100%; height: 300px"></div>
+			</row>
 		</div>
 		<!-- end #content -->
 		
