@@ -28,16 +28,12 @@ include 'koneksi.php';
             <tr>
                 <th>No</th>
                 <th>No Surat</th>
-                <th>NIK</th>
                 <th>Nama</th>
                 <th>Tanggal Lahir</th>
                 <th>Jenis Kelamin</th>
                 <th>Agama</th>
-                <th>Hari</th>
-                <th>Tanggal</th>
-                <th>Sebab</th>
-                <th>Tempat</th>
-                <th>Pelapor</th>
+                <th>Tanggal Kematian</th>
+                <th>Sebab Kematian</th>
             </tr>
         </thead>
         <tbody>
@@ -50,16 +46,12 @@ include 'koneksi.php';
             <tr>
                 <td><?= $no++ ?></td>
                 <td><?= $row['no_surat'] ?></td>
-                <td><?= $row['nik'] ?></td>
                 <td><?= $row['nama'] ?></td>
                 <td><?= $row['tanggal_lahir'] ?></td>
                 <td><?= $row['jenis_kelamin'] ?></td>
                 <td><?= $row['agama'] ?></td>
-                <td><?= $row['hari'] ?></td>
-                <td><?= $row['tanggal'] ?></td>
-                <td><?= $row['sebab'] ?></td>
-                <td><?= $row['tempat'] ?></td>
-                <td><?= $row['pelapor'] ?></td>
+                <td><?= $row['tanggal_kematian'] ?></td>
+                <td><?= $row['sebab_kematian'] ?></td>
             </tr>
 
             <?php 

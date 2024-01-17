@@ -68,7 +68,7 @@ if (!isset($_SESSION['username'])) {
                 <li class="dropdown navbar-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="assets/img/user/user-13.jpg" alt="" />
-                        <span class="d-none d-md-inline">John Doe</span> <b class="caret"></b>
+                        <span class="d-none d-md-inline"><?= $_SESSION['level'] ?></span> <b class="caret"></b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="logout.php" class="dropdown-item">Log Out</a>
@@ -93,8 +93,7 @@ if (!isset($_SESSION['username'])) {
                             </div>
                             <div class="info">
                                 <b class="caret pull-right"></b>
-                                John Doe
-                                <small>Administrator</small>
+                                <?= $_SESSION['level'] ?>
                             </div>
                         </a>
                     </li>
@@ -124,6 +123,7 @@ if (!isset($_SESSION['username'])) {
                             <li><a href="inputdatakelahiran.php">Input Data Kelahiran</a></li>
                             <li><a href="inputdatakematian.php">Input Data Kematian</a></li>
                             <li><a href="inputdataizinusaha.php">Input Data Izin Usaha</a></li>
+							<li><a href="inputdatapindah.php">Tambah Data Pindah</a></li>
 							<li><a href="approve.php">Approve</a></li>
                         </ul>
                     </li>
@@ -138,6 +138,7 @@ if (!isset($_SESSION['username'])) {
 							<li><a href="rekapitulasidatakelahiran.php">Rekapitulasi Data Kelahiran</a></li>
 							<li><a href="rekapitulasidatakematian.php">Rekapitulasi Data Kematian</a></li>
 							<li><a href="rekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidatapindah.php">Rekapitulasi Data Pindah</a></li>
                         </ul>
                     </li>
                     <!-- begin sidebar minify button -->
@@ -188,8 +189,6 @@ if (!isset($_SESSION['username'])) {
 											<th>Agama</th>
 											<th>Alamat</th>
 											<th>Pekerjaan</th>
-											<th>Alamat Usaha</th>
-											<th>Jenis Usaha</th>
 											<th>Nama Usaha</th>
 											<th width="1%">Action</th>
 										</tr>
@@ -211,8 +210,6 @@ if (!isset($_SESSION['username'])) {
 											<td><?= $row['agama'] ?></td>
 											<td><?= $row['alamat'] ?></td>
 											<td><?= $row['pekerjaan'] ?></td>
-											<td><?= $row['alamat_usaha'] ?></td>
-											<td><?= $row['jenis_usaha'] ?></td>
 											<td><?= $row['nama_usaha'] ?></td>
 											<td class="with-btn" nowrap>
 												<a href="inputdataizinusaha.php?status=0&id=<?= $row['id'] ?>" class="btn btn-sm btn-primary width-60 m-r-2">Edit</a>

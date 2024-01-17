@@ -8,16 +8,12 @@ if (!isset($_SESSION['username'])) {
 }
 
 $no_surat = "SKM-" . rand(10, 99) . rand(10, 99) . "/" . date('m/y');
-$nik = "";
 $nama = "";
 $tanggal_lahir = "";
 $jenis_kelamin = "";
 $agama = "";
-$hari = "";
 $tanggal = "";
 $sebab = "";
-$tempat = "";
-$pelapor = "";
 $jnspost = 'insert';
 $idkem = '';
 
@@ -27,16 +23,12 @@ if($_GET){
         $result = $koneksi->query("SELECT * FROM data_kematian WHERE id = $id_kematian");
         $row = $result->fetch_assoc();
         $no_surat = $row['no_surat'];
-        $nik = $row['nik'];
         $nama = $row['nama'];
         $tanggal_lahir = $row['tanggal_lahir'];
         $jenis_kelamin = $row['jenis_kelamin'];
         $agama = $row['agama'];
-        $hari = $row['hari'];
-        $tanggal = $row['tanggal'];
-        $sebab = $row['sebab'];
-        $tempat = $row['tempat'];
-        $pelapor = $row['pelapor'];
+        $tanggal = $row['tanggal_kematian'];
+        $sebab = $row['sebab_kematian'];
         $idkem = $row['id'];
         $jnspost = 'edit';
     }
@@ -102,7 +94,7 @@ if($_GET){
                 <li class="dropdown navbar-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="assets/img/user/user-13.jpg" alt="" />
-                        <span class="d-none d-md-inline">John Doe</span> <b class="caret"></b>
+                        <span class="d-none d-md-inline"><?= $_SESSION['level'] ?></span> <b class="caret"></b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="logout.php" class="dropdown-item">Log Out</a>
@@ -127,8 +119,7 @@ if($_GET){
                             </div>
                             <div class="info">
                                 <b class="caret pull-right"></b>
-                                John Doe
-                                <small>Administrator</small>
+                                <?= $_SESSION['level'] ?>
                             </div>
                         </a>
                     </li>
@@ -158,6 +149,7 @@ if($_GET){
                             <li><a href="inputdatakelahiran.php">Input Data Kelahiran</a></li>
                             <li><a href="inputdatakematian.php">Input Data Kematian</a></li>
                             <li><a href="inputdataizinusaha.php">Input Data Izin Usaha</a></li>
+							<li><a href="inputdatapindah.php">Tambah Data Pindah</a></li>
 							<li><a href="approve.php">Approve</a></li>
                         </ul>
                     </li>
@@ -171,7 +163,8 @@ if($_GET){
 							<li><a href="rekapitulasidatapenduduk.php">Rekapitulasi Data Penduduk </a></li>
 							<li><a href="rekapitulasidatakelahiran.php">Rekapitulasi Data Kelahiran</a></li>
 							<li><a href="rekapitulasidatakematian.php">Rekapitulasi Data Kematian</a></li>
-							<li><a href="jrekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidatapindah.php">Rekapitulasi Data Pindah</a></li>
                         </ul>
                     </li>
                     <!-- begin sidebar minify button -->
@@ -241,12 +234,6 @@ if($_GET){
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-15">
-                                    <label class="col-form-label col-md-3">NIK</label>
-                                    <div class="col-md-9">
-                                        <input type="text" name="nik" value="<?= $nik ?>" class="form-control m-b-5" placeholder="Masukan NIK" />
-                                    </div>
-                                </div>
-                                <div class="form-group row m-b-15">
                                     <label class="col-form-label col-md-3">Nama</label>
                                     <div class="col-md-9">
                                         <input type="text" name="nama" value="<?= $nama ?>" class="form-control m-b-5" placeholder="Masukan Nama" />
@@ -279,41 +266,15 @@ if($_GET){
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-15">
-                                    <label class="col-form-label col-md-3">Hari</label>
-                                    <div class="col-md-9">
-                                        <select name="hari" value="<?= $hari ?>" class="form-control">
-                                            <option value="Senin" <?= ($hari == 'Senin') ? 'selected' : '' ?>>Senin</option>
-                                            <option value="Selasa" <?= ($hari == 'Selasa') ? 'selected' : '' ?>>Selasa</option>
-                                            <option value="Rabu" <?= ($hari == 'Rabu') ? 'selected' : '' ?>>Rabu</option>
-                                            <option value="Kamis" <?= ($hari == 'Kamis') ? 'selected' : '' ?>>Kamis</option>
-                                            <option value="Jumat" <?= ($hari == 'Jumat') ? 'selected' : '' ?>>Jumat</option>
-                                            <option value="Sabtu" <?= ($hari == 'Sabtu') ? 'selected' : '' ?>>Sabtu</option>
-                                            <option value="Minggu" <?= ($hari == 'Minggu') ? 'selected' : '' ?>>Minggu</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row m-b-15">
-                                    <label class="col-form-label col-md-3">Tanggal</label>
+                                    <label class="col-form-label col-md-3">Tanggal Kematian</label>
                                     <div class="col-md-9">
                                         <input type="date" name="tanggal" value="<?= $tanggal ?>" class="form-control m-b-5" />
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-15">
-                                    <label class="col-form-label col-md-3">Sebab</label>
+                                    <label class="col-form-label col-md-3">Sebab Kematian</label>
                                     <div class="col-md-9">
                                         <input type="text" name="sebab" value="<?= $sebab ?>" class="form-control m-b-5" placeholder="Masukan Sebab Kematian" />
-                                    </div>
-                                </div>
-                                <div class="form-group row m-b-15">
-                                    <label class="col-form-label col-md-3">Tempat</label>
-                                    <div class="col-md-9">
-                                        <input type="text" name="tempat" value="<?= $tempat ?>" class="form-control m-b-5" placeholder="Masukan Tempat" />
-                                    </div>
-                                </div>
-                                <div class="form-group row m-b-15">
-                                    <label class="col-form-label col-md-3">Pelapor</label>
-                                    <div class="col-md-9">
-                                        <input type="text" name="pelapor" value="<?= $pelapor ?>" class="form-control m-b-5" placeholder="Masukan Nama Pelapor" />
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-sm btn-primary m-r-5">Simpan</button>

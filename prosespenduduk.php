@@ -11,25 +11,24 @@ $agama = $_POST['agama'];
 $pekerjaan = $_POST['pekerjaan'];
 $alamat = $_POST['alamat'];
 $status_perkawinan = $_POST['status_perkawinan'];
-$email = $_POST['email'];
-$no_telpon = $_POST['no_telpon'];
+$pendidikan = $_POST['pendidikan'];
 
-$foto = $_FILES['foto']['name'];
-$foto_temp = $_FILES['foto']['tmp_name'];
-$folder_upload = "upload/";
-if($foto != ""){
-    $setfoto = ", foto = '$foto' ";
-} else {
-    $setfoto = '';
-}
+// $foto = $_FILES['foto']['name'];
+// $foto_temp = $_FILES['foto']['tmp_name'];
+// $folder_upload = "upload/";
+// if($foto != ""){
+//     $setfoto = ", foto = '$foto' ";
+// } else {
+//     $setfoto = '';
+// }
 
-move_uploaded_file($foto_temp, $folder_upload . $foto);
+// move_uploaded_file($foto_temp, $folder_upload . $foto);
 
 // var_dump($setfoto); die();
 if($jns != 'edit'){
-    $query = "INSERT INTO data_penduduk (nik, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, pekerjaan, alamat, status_perkawinan, email, no_telpon, foto, status) VALUES ('$nik', '$nama', '$tempat_lahir', '$tanggal_lahir', '$jenis_kelamin', '$agama', '$pekerjaan', '$alamat', '$status_perkawinan', '$email', '$no_telpon', '$foto', '0')";
+    $query = "INSERT INTO data_penduduk (nik, nama, tempat_lahir, tanggal_lahir, jenis_kelamin, agama, pekerjaan, alamat, status_perkawinan, pendidikan, status) VALUES ('$nik', '$nama', '$tempat_lahir', '$tanggal_lahir', '$jenis_kelamin', '$agama', '$pekerjaan', '$alamat', '$status_perkawinan', '$pendidikan', '0')";
 } else {
-    $query = "UPDATE data_penduduk SET nik = '$nik', nama = '$nama', tempat_lahir = '$tempat_lahir', tanggal_lahir = '$tanggal_lahir', jenis_kelamin = '$jenis_kelamin', agama = '$agama', pekerjaan = '$pekerjaan', alamat = '$alamat', status_perkawinan = '$status_perkawinan', email = '$email', no_telpon = '$no_telpon' $setfoto WHERE id = " . $_POST['id_penduduk'];
+    $query = "UPDATE data_penduduk SET nik = '$nik', nama = '$nama', tempat_lahir = '$tempat_lahir', tanggal_lahir = '$tanggal_lahir', jenis_kelamin = '$jenis_kelamin', agama = '$agama', pekerjaan = '$pekerjaan', alamat = '$alamat', status_perkawinan = '$status_perkawinan', pendidikan = '$pendidikan' WHERE id = " . $_POST['id_penduduk'];
 }
 
 if ($koneksi->query($query) === TRUE) {

@@ -35,8 +35,6 @@ include 'koneksi.php';
                 <th>Agama</th>
                 <th>Alamat</th>
                 <th>Pekerjaan</th>
-                <th>Alamat Usaha</th>
-                <th>Jenis Usaha</th>
                 <th>Nama Usaha</th>
             </tr>
         </thead>
@@ -57,8 +55,6 @@ include 'koneksi.php';
                 <td><?= $row['agama'] ?></td>
                 <td><?= $row['alamat'] ?></td>
                 <td><?= $row['pekerjaan'] ?></td>
-                <td><?= $row['alamat_usaha'] ?></td>
-                <td><?= $row['jenis_usaha'] ?></td>
                 <td><?= $row['nama_usaha'] ?></td>
             </tr>
 

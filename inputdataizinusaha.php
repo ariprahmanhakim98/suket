@@ -16,8 +16,6 @@ $agama = "";
 $alamat = "";
 $pekerjaan = "";
 $nama_usaha = "";
-$jenis_usaha = "";
-$alamat_usaha = "";
 $jnspost = 'insert';
 $idusaha = '';
 
@@ -35,8 +33,6 @@ if($_GET){
         $alamat = $row['alamat'];
         $pekerjaan = $row['pekerjaan'];
         $nama_usaha = $row['nama_usaha'];
-        $jenis_usaha = $row['jenis_usaha'];
-        $alamat_usaha = $row['alamat_usaha'];
         $idusaha = $row['id'];
         $jnspost = 'edit';
     }
@@ -103,7 +99,7 @@ if($_GET){
                 <li class="dropdown navbar-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="assets/img/user/user-13.jpg" alt="" />
-                        <span class="d-none d-md-inline">John Doe</span> <b class="caret"></b>
+                        <span class="d-none d-md-inline"><?= $_SESSION['level'] ?></span> <b class="caret"></b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="logout.php" class="dropdown-item">Log Out</a>
@@ -128,8 +124,7 @@ if($_GET){
                             </div>
                             <div class="info">
                                 <b class="caret pull-right"></b>
-                                John Doe
-                                <small>Administrator</small>
+                                <?= $_SESSION['level'] ?>
                             </div>
                         </a>
                     </li>
@@ -159,6 +154,7 @@ if($_GET){
                             <li><a href="inputdatakelahiran.php">Input Data Kelahiran</a></li>
                             <li><a href="inputdatakematian.php">Input Data Kematian</a></li>
                             <li><a href="inputdataizinusaha.php">Input Data Izin Usaha</a></li>
+							<li><a href="inputdatapindah.php">Tambah Data Pindah</a></li>
 							<li><a href="approve.php">Approve</a></li>
                         </ul>
                     </li>
@@ -173,6 +169,7 @@ if($_GET){
 							<li><a href="rekapitulasidatakelahiran.php">Rekapitulasi Data Kelahiran</a></li>
 							<li><a href="rekapitulasidatakematian.php">Rekapitulasi Data Kematian</a></li>
 							<li><a href="rekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidatapindah.php">Rekapitulasi Data Pindah</a></li>
                         </ul>
                     </li>
                     <!-- begin sidebar minify button -->
@@ -294,18 +291,6 @@ if($_GET){
                                     <label class="col-form-label col-md-3">Nama Usaha</label>
                                     <div class="col-md-9">
                                         <input type="text" name="nama_usaha" value="<?= $nama_usaha ?>" class="form-control m-b-5" placeholder="Masukan Nama Usaha" />
-                                    </div>
-                                </div>
-                                <div class="form-group row m-b-15">
-                                    <label class="col-form-label col-md-3">Jenis Usaha</label>
-                                    <div class="col-md-9">
-                                        <input type="text" name="jenis_usaha" value="<?= $jenis_usaha ?>" class="form-control m-b-5" placeholder="Masukan Jenis Usaha" />
-                                    </div>
-                                </div>
-                                <div class="form-group row m-b-15">
-                                    <label class="col-form-label col-md-3">Alamat Usaha</label>
-                                    <div class="col-md-9">
-                                        <textarea name="alamat_usaha" value="<?= $alamat_usaha ?>" class="form-control" rows="3"><?= $alamat_usaha ?></textarea>
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-sm btn-primary m-r-5">Simpan</button>

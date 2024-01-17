@@ -102,7 +102,7 @@ if($_GET){
                 <li class="dropdown navbar-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="assets/img/user/user-13.jpg" alt="" />
-                        <span class="d-none d-md-inline">John Doe</span> <b class="caret"></b>
+                        <span class="d-none d-md-inline"><?= $_SESSION['level'] ?></span> <b class="caret"></b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="logout.php" class="dropdown-item">Log Out</a>
@@ -127,8 +127,7 @@ if($_GET){
                             </div>
                             <div class="info">
                                 <b class="caret pull-right"></b>
-                                John Doe
-                                <small>Administrator</small>
+                                <?= $_SESSION['level'] ?>
                             </div>
                         </a>
                     </li>
@@ -172,7 +171,8 @@ if($_GET){
 							<li><a href="rekapitulasidatapenduduk.php">Rekapitulasi Data Penduduk </a></li>
 							<li><a href="rekapitulasidatakelahiran.php">Rekapitulasi Data Kelahiran</a></li>
 							<li><a href="rekapitulasidatakematian.php">Rekapitulasi Data Kematian</a></li>
-							<li><a href="jrekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidatapindah.php">Rekapitulasi Data Pindah</a></li>
                         </ul>
                     </li>
                     <!-- begin sidebar minify button -->

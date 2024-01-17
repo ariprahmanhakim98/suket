@@ -32,7 +32,6 @@ include 'koneksi.php';
                 <th>Tanggal</th>
                 <th>Tempat</th>
                 <th>Nama Anak</th>
-                <th>Jenis Kelamin</th>
                 <th>Nama Ibu</th>
                 <th>Nama Ayah</th>
                 <th>Alamat</th>
@@ -52,7 +51,6 @@ include 'koneksi.php';
                 <td><?= $row['tanggal'] ?></td>
                 <td><?= $row['tempat'] ?></td>
                 <td><?= $row['nama_anak'] ?></td>
-                <td><?= $row['jenis_kelamin'] ?></td>
                 <td><?= $row['nama_ibu'] ?></td>
                 <td><?= $row['nama_ayah'] ?></td>
                 <td><?= $row['alamat'] ?></td>

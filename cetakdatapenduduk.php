@@ -27,7 +27,6 @@ include 'koneksi.php';
         <thead>
             <tr>
                 <th>No</th>
-                <th>Foto</th>
                 <th>NIK</th>
                 <th>Nama</th>
                 <th>Tempat Lahir</th>
@@ -36,8 +35,7 @@ include 'koneksi.php';
                 <th>Agama</th>
                 <th>Pekerjaan</th>
                 <th>Status Perkawinan</th>
-                <th>Email</th>
-                <th>No HP</th>
+                <th>Pendidikan</th>
                 <th>Alamat</th>
             </tr>
         </thead>
@@ -50,9 +48,6 @@ include 'koneksi.php';
             ?>
             <tr>
                 <td><?= $no++ ?></td>
-                <td>
-                    <img src='upload/<?= $row['foto'] ?>' width="50px" class="img-rounded height-30" />
-                </td>
                 <td><?= $row['nik'] ?></td>
                 <td><?= $row['nama'] ?></td>
                 <td><?= $row['tempat_lahir'] ?></td>
@@ -61,8 +56,7 @@ include 'koneksi.php';
                 <td><?= $row['agama'] ?></td>
                 <td><?= $row['pekerjaan'] ?></td>
                 <td><?= $row['status_perkawinan'] ?></td>
-                <td><?= $row['email'] ?></td>
-                <td><?= $row['no_telpon'] ?></td>
+                <td><?= $row['pendidikan'] ?></td>
                 <td><?= $row['alamat'] ?></td>
             </tr>
 

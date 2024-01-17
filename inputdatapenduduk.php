@@ -7,18 +7,16 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-$foto = '';
 $nik = '';
 $nama = '';
 $tmplahir = '';
 $tgllahir = '';
+$jk = '';
 $agama = '';
 $pekerjaan = '';
-$jk = '';
-$status = '';
-$email = '';
-$tlp = '';
 $alamat = '';
+$status = '';
+$pendidikan = '';
 $jnspost = 'insert';
 $idpen = '';
 
@@ -27,18 +25,16 @@ if($_GET){
         $id_penduduk = $_GET['id'];
         $result = $koneksi->query("SELECT * FROM data_penduduk WHERE id = $id_penduduk");
         $row = $result->fetch_assoc();
-        $foto = $row['foto'];
         $nik = $row['nik'];
         $nama = $row['nama'];
         $tmplahir = $row['tempat_lahir'];
         $tgllahir = $row['tanggal_lahir'];
+        $jk = $row['jenis_kelamin'];
         $agama = $row['agama'];
         $pekerjaan = $row['pekerjaan'];
-        $jk = $row['jenis_kelamin'];
-        $status = $row['status_perkawinan'];
-        $email = $row['email'];
-        $tlp = $row['no_telpon'];
         $alamat = $row['alamat'];
+        $status = $row['status_perkawinan'];
+        $pendidikan = $row['pendidikan'];
         $jnspost = 'edit';
         $idpen = $row['id'];
     }
@@ -103,7 +99,7 @@ if($_GET){
                 <li class="dropdown navbar-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="assets/img/user/user-13.jpg" alt="" />
-                        <span class="d-none d-md-inline">John Doe</span> <b class="caret"></b>
+                        <span class="d-none d-md-inline"><?= $_SESSION['level'] ?></span> <b class="caret"></b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="logout.php" class="dropdown-item">Log Out</a>
@@ -128,8 +124,7 @@ if($_GET){
                             </div>
                             <div class="info">
                                 <b class="caret pull-right"></b>
-                                John Doe
-                                <small>Administrator</small>
+                                <?= $_SESSION['level'] ?>
                             </div>
                         </a>
                     </li>
@@ -159,6 +154,7 @@ if($_GET){
                             <li><a href="inputdatakelahiran.php">Tambah Data Kelahiran</a></li>
                             <li><a href="inputdatakematian.php">Tambah Data Kematian</a></li>
                             <li><a href="inputdataizinusaha.php">Tambah Data Izin Usaha</a></li>
+							<li><a href="inputdatapindah.php">Tambah Data Pindah</a></li>
 							<li><a href="approve.php">Approve</a></li>
                         </ul>
                     </li>
@@ -172,7 +168,8 @@ if($_GET){
 							<li><a href="rekapitulasidatapenduduk.php">Rekapitulasi Data Penduduk </a></li>
 							<li><a href="rekapitulasidatakelahiran.php">Rekapitulasi Data Kelahiran</a></li>
 							<li><a href="rekapitulasidatakematian.php">Rekapitulasi Data Kematian</a></li>
-							<li><a href="jrekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidatapindah.php">Rekapitulasi Data Pindah</a></li>
                         </ul>
                     </li>
                     <!-- begin sidebar minify button -->
@@ -231,15 +228,9 @@ if($_GET){
                         <!-- end panel-heading -->
                         <!-- begin panel-body -->
                         <div class="panel-body">
-                            <form action="prosespenduduk.php" method="post" enctype="multipart/form-data">
+                            <form action="prosespenduduk.php" method="post">
                                 <input type="hidden" name="id_penduduk" value="<?= $idpen ?>">
                                 <input type="hidden" name="jenis_post" value="<?= $jnspost ?>">
-                                <div class="form-group row m-b-15">
-                                    <label class="col-form-label col-md-3">FOTO</label>
-                                    <div class="col-md-9">
-                                        <input type="file" class="form-control m-b-5" name="foto" accept="image/*" value="<?= $foto ?>"/>
-                                    </div>
-                                </div>
                                 <div class="form-group row m-b-15">
                                     <label class="col-form-label col-md-3">NIK</label>
                                     <div class="col-md-9">
@@ -265,6 +256,15 @@ if($_GET){
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-15">
+                                    <label class="col-form-label col-md-3">Jenis Kelamin</label>
+                                    <div class="col-md-9">
+                                        <select name="jenis_kelamin" value="<?= $jk ?>" class="form-control">
+                                            <option value="Laki-Laki" <?= ($jk == 'Laki-Laki') ? 'selected' : '' ?>>Laki-Laki</option>
+                                            <option value="Perempuan" <?= ($jk == 'Perempuan') ? 'selected' : '' ?>>Perempuan</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row m-b-15">
                                     <label class="col-form-label col-md-3">Agama</label>
                                     <div class="col-md-9">
                                         <select name="agama" value="<?= $agama ?>" class="form-control">
@@ -282,12 +282,9 @@ if($_GET){
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-15">
-                                    <label class="col-form-label col-md-3">Jenis Kelamin</label>
+                                    <label class="col-form-label col-md-3">Alamat</label>
                                     <div class="col-md-9">
-                                        <select name="jenis_kelamin" value="<?= $jk ?>" class="form-control">
-                                            <option value="Laki-Laki" <?= ($jk == 'Laki-Laki') ? 'selected' : '' ?>>Laki-Laki</option>
-                                            <option value="Perempuan" <?= ($jk == 'Perempuan') ? 'selected' : '' ?>>Perempuan</option>
-                                        </select>
+                                        <textarea name="alamat" value="<?= $alamat ?>" class="form-control" rows="3"><?= $alamat ?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-15">
@@ -301,21 +298,9 @@ if($_GET){
                                     </div>
                                 </div>
                                 <div class="form-group row m-b-15">
-                                    <label class="col-form-label col-md-3">Email</label>
+                                    <label class="col-form-label col-md-3">Pendidikan</label>
                                     <div class="col-md-9">
-                                        <input type="enail" name="email" value="<?= $email ?>" class="form-control m-b-5" placeholder="Masukan Email" />
-                                    </div>
-                                </div>
-                                <div class="form-group row m-b-15">
-                                    <label class="col-form-label col-md-3">No. Telpon</label>
-                                    <div class="col-md-9">
-                                        <input type="number" name="no_telpon" value="<?= $tlp ?>" class="form-control m-b-5" placeholder="Masukan Nomor Telpon" />
-                                    </div>
-                                </div>
-                                <div class="form-group row m-b-15">
-                                    <label class="col-form-label col-md-3">Alamat</label>
-                                    <div class="col-md-9">
-                                        <textarea name="alamat" value="<?= $alamat ?>" class="form-control" rows="3"><?= $alamat ?></textarea>
+                                        <input type="text" name="pendidikan" value="<?= $pendidikan ?>" class="form-control m-b-5" placeholder="Masukan Pendidikan" />
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-sm btn-primary m-r-5">Simpan</button>

@@ -67,7 +67,7 @@ if (!isset($_SESSION['username'])) {
                 <li class="dropdown navbar-user">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="assets/img/user/user-13.jpg" alt="" />
-                        <span class="d-none d-md-inline">John Doe</span> <b class="caret"></b>
+                        <span class="d-none d-md-inline"><?= $_SESSION['level'] ?></span> <b class="caret"></b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="logout.php" class="dropdown-item">Log Out</a>
@@ -92,8 +92,7 @@ if (!isset($_SESSION['username'])) {
                             </div>
                             <div class="info">
                                 <b class="caret pull-right"></b>
-                                John Doe
-                                <small>Administrator</small>
+                                <?= $_SESSION['level'] ?>
                             </div>
                         </a>
                     </li>
@@ -123,6 +122,7 @@ if (!isset($_SESSION['username'])) {
                             <li><a href="inputdatakelahiran.php">Input Data Kelahiran</a></li>
                             <li><a href="inputdatakematian.php">Input Data Kematian</a></li>
                             <li><a href="inputdataizinusaha.php">Input Data Izin Usaha</a></li>
+							<li><a href="inputdatapindah.php">Tambah Data Pindah</a></li>
 							<li><a href="approve.php">Approve</a></li>
                         </ul>
                     </li>
@@ -137,6 +137,7 @@ if (!isset($_SESSION['username'])) {
 							<li><a href="rekapitulasidatakelahiran.php">Rekapitulasi Data Kelahiran</a></li>
 							<li><a href="rekapitulasidatakematian.php">Rekapitulasi Data Kematian</a></li>
 							<li><a href="rekapitulasidataizinusaha.php">Rekapitulasi Data Izin Usaha</a></li>
+							<li><a href="rekapitulasidatapindah.php">Rekapitulasi Data Pindah</a></li>
                         </ul>
                     </li>
                     <!-- begin sidebar minify button -->
@@ -180,16 +181,12 @@ if (!isset($_SESSION['username'])) {
 										<tr>
 											<th>No</th>
 											<th>No Surat</th>
-											<th>NIK</th>
 											<th>Nama</th>
 											<th>Tanggal Lahir</th>
 											<th>Jenis Kelamin</th>
 											<th>Agama</th>
-											<th>Hari</th>
-											<th>Tanggal</th>
-											<th>Sebab</th>
-											<th>Tempat</th>
-											<th>Pelapor</th>
+											<th>Tanggal Kematian</th>
+											<th>Sebab Kematian</th>
 											<th width="1%">Action</th>
 										</tr>
 									</thead>
@@ -203,16 +200,12 @@ if (!isset($_SESSION['username'])) {
 										<tr>
 											<td><?= $no++ ?></td>
 											<td><?= $row['no_surat'] ?></td>
-											<td><?= $row['nik'] ?></td>
 											<td><?= $row['nama'] ?></td>
 											<td><?= $row['tanggal_lahir'] ?></td>
 											<td><?= $row['jenis_kelamin'] ?></td>
 											<td><?= $row['agama'] ?></td>
-											<td><?= $row['hari'] ?></td>
-											<td><?= $row['tanggal'] ?></td>
-											<td><?= $row['sebab'] ?></td>
-											<td><?= $row['tempat'] ?></td>
-											<td><?= $row['pelapor'] ?></td>
+											<td><?= $row['tanggal_kematian'] ?></td>
+											<td><?= $row['sebab_kematian'] ?></td>
 											<td class="with-btn" nowrap>
 												<a href="inputdatakematian.php?status=0&id=<?= $row['id'] ?>" class="btn btn-sm btn-primary width-60 m-r-2">Edit</a>
 												<a href="deletedata.php?id=<?= $row['id'] ?>&tabel=data_kematian" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" class="btn btn-sm btn-danger width-60">Delete</a>
